@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 public class SimpleStack implements Stack {
 
-    ArrayList<Item> pile;
+    private final ArrayList<Item> pile;
 
     public SimpleStack () {
         this.pile = new ArrayList<>();
@@ -53,6 +53,9 @@ public class SimpleStack implements Stack {
      */
     @Override
     public Item pop() throws EmptyStackException {
-        return null;
+        if(this.isEmpty()) {
+            throw new EmptyStackException();
+        }
+        return this.pile.remove(this.getSize()-1);
     }
 }
