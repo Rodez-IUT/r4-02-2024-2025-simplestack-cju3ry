@@ -10,7 +10,7 @@ import static org.junit.jupiter.api.Assertions.*;
 class SimpleStackTest {
 
     @Test
-    @DisplayName("Test the state of a newly created slack")
+    @DisplayName("Test the state of a newly created stack")
     public void testCreateEmptyStack() { // Test case
 
         // When a freshly stack is created
@@ -58,5 +58,48 @@ class SimpleStackTest {
         // When we "pop" the stack, should throws an EmptyStackException.
         //assertThrows(EmptyStackException.class, ()->stack.pop(), "EmptyStackException not thrown");
         assertThrows(EmptyStackException.class, stack::pop, "EmptyStackException not thrown");
+    }
+
+    @Test
+    @DisplayName("Test pop in a normal utilisation")
+    public void testPopOnNonEmptyStack() throws EmptyStackException {
+        // Given a stack
+        Stack stack = new SimpleStack();
+        Item item = new SimpleItem();
+        stack.push(item);
+
+        // When we "pop" the stack, should return the item
+        Item returnItem = stack.pop();
+
+        //Then the stack must be empty
+        assertTrue(stack.isEmpty(), "The stack is empty");
+
+        //And the po return the item
+        assertEquals(returnItem, item, "Both items must be equals");
+    }
+
+    @Test
+    @DisplayName("Test peek in a normal utilisation")
+    public void testPeek() throws EmptyStackException {
+        // Given a stack
+        Stack stack = new SimpleStack();
+        Item item = new SimpleItem();
+        stack.push(item);
+
+        // When we "peek" the stack, should return the item at the top
+        Item returnItem = stack.peek();
+
+        //Then the return item must be the correct item
+        assertEquals(returnItem, item, "Both items must be equals");
+    }
+
+    @Test
+    @DisplayName("Test peek in a limit utilisation")
+    public void testPeekOnEmptyStackException() {
+        // Given a stack
+        Stack stack = new SimpleStack();
+
+        // When we try to "peek" the stack, an exception is throws
+        assertThrows(EmptyStackException.class, stack::peek, "EmptyStackException not thrown");
     }
 }

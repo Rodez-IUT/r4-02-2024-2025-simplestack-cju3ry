@@ -7,6 +7,7 @@ public class SimpleStack implements Stack {
     private final ArrayList<Item> pile;
 
     public SimpleStack () {
+
         this.pile = new ArrayList<>();
     }
 
@@ -15,6 +16,7 @@ public class SimpleStack implements Stack {
      */
     @Override
     public boolean isEmpty() {
+
         return pile.isEmpty();
     }
 
@@ -23,6 +25,7 @@ public class SimpleStack implements Stack {
      */
     @Override
     public int getSize() {
+
         return pile.size();
     }
 
@@ -42,6 +45,9 @@ public class SimpleStack implements Stack {
      */
     @Override
     public Item peek() throws EmptyStackException {
+        if(this.isEmpty()) {
+            throw new EmptyStackException();
+        }
         return pile.get(this.getSize()-1);
     }
 
